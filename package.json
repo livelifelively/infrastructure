@@ -1,0 +1,17 @@
+{
+  "name": "infra-as-code",
+  "version": "0.1.0",
+  "description": "server infrastructure as terraform code",
+  "main": "index.js",
+  "repository": "git@github.com:livelifelively/infrastructure.git",
+  "author": "Ashish Rana <dev.livelifelively@gmail.com>",
+  "private": true,
+  "scripts": {
+    "tf-init-backend": "terraform init",
+    "tf-init": "terraform init -backend-config=backend.hcl",
+    "tf-format": "terraform fmt",
+    "tf-validate": "terraform validate",
+    "tf-plan": "terraform plan",
+    "tf-apply": "terraform apply"
+  }
+}
