@@ -16,8 +16,9 @@ terraform state needs to stored remotely in aws s3. To do that,
 1. we are creating s3 and dynamodb for different  for all projects.
 2. these backend configs will be then passed to respective terraform repos
 3. the main creates a state remote for all projects.
+4. simply add config values to `backend.hcl` file in respective project.
 
-## Create genesis state from the main folder
+## Create genesis state
 
 first just create the infrastructure, that is, `module "tf-state"` using `terraform init` and then `terraform apply`. 
 
@@ -25,13 +26,13 @@ the main's state can be commited to github. not to be shared with others. keepin
 
 If in future we want to store state for this one also in remote s3, add `backend "s3" {}` to backend. add backend.hcl file. run `yarn tf-init`, which will use `backend.hcl` configs. you will given option to send local state to remote, do make sure to send it.
 
-for the rest of modules, just create the infrastructure using `terraform init` and then `terraform apply`. use names and region used to generate s3 bucket and dynamodb table in corresponding project's `terraform.tfvars` and `backend.hcl` files.
+for the rest of modules, just create the infrastructure using `terraform apply`. use names and region used to generate s3 bucket and dynamodb table in corresponding project's `backend.hcl` files.
 
-ALSO, notice that the s3 backend can be in a different region from the infrastructure. backend.hcl has required argument for region. so lets keep the main and all the project tf files in one region only.
+ALSO, notice that the s3 backend can be in a different region from the infrastructure. backend.hcl has required argument for region. so lets keep all the project's s3 backends in one region only.
 
-## DO NOT DESTROY the main
+## DO NOT DESTROY
 
-the main refers to all the other files, do not delete it, like ever.
+the `module "tf-state"` Has all the other files, do not delete, like ever.
 
 ## project admins
 
