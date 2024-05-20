@@ -11,13 +11,17 @@ terraform {
   backend "s3" {}
 }
 
+provider "aws" {
+  region = "ap-south-1"
+}
+
 module "tf-state" {
   source = "./modules/tf-state"
 
-  bucket         = local.bucket_name
-  dynamodb_table = local.table_name
+  bucket         = "tf-state-bucket.infra.all"
+  dynamodb_table = "tf_state_locking.infra.all"
   key            = "tf_infra/terraform.tfstate"
-  region         = var.region
+  region         = "ap-south-1"
 }
 
 module "tf-state-ezybots" {
