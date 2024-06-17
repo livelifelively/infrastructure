@@ -32,3 +32,12 @@ module "tf-state-ezybots" {
   region         = "ap-south-1"
   dynamodb_table = "tf_state_locking.ezybots.com"
 }
+
+module "tf-state-kartvya" {
+  source = "./modules/tf-state"
+
+  bucket         = "tf-state-bucket.kartvya.com"
+  key            = "tf_infra/terraform.tfstate"
+  region         = "ap-south-1"
+  dynamodb_table = "tf_state_locking.kartvya.com"
+}
