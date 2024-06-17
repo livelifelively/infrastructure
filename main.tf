@@ -41,3 +41,5 @@ module "tf-state-kartvya" {
   region         = "ap-south-1"
   dynamodb_table = "tf_state_locking.kartvya.com"
 }
+
+# #TODO should we setup project level admins here?
